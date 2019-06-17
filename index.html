@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>BlackJack</title>
+
+	<!-- PWA DEPENDACIES -->
+    <link rel="js" type="sw.js" href="">
+    <script src="/src/js/app.js"></script>
+	
+</head>
+
+<body onload="load()">
+	
+	Asal
+	<select id="asal">
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	</select>
+	<br>
+	
+	Tujuan
+	<select id="tujuan">
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	</select>
+	<br>
+	
+	Berat : <input type="text" id="berat"></input> Kg
+	<br>
+	
+	<select id="tipe">
+	  <option value="2.5">Kilat</option>
+	  <option value="1.5">Cepat</option>
+	  <option value="1">Regular</option>
+	</select>
+	<br>
+	
+	<button id="submit" onclick="calculate()">Submit</button>
+	<br>
+	
+	<span id="result"></span>
+	<script>
+	
+		var data = [];
+	
+		function viewStorage()
+		{
+			var items = JSON.parse(localStorage.getItem("data"));
+			var resultString = "";
+			for(var i = 0 ; i < items.length ; i++)
+			{
+				resultString += items[i] + "<br>";
+			}
+			document.getElementById("result").innerHTML = resultString;
+		}
+	
+		function load()
+		{
+			if (localStorage.getItem("data")) 
+			{
+				data = JSON.parse(localStorage.getItem("data"));
+			}
+			viewStorage();
+		}
+	
+		function addStorage(data)
+		{
+			var items = JSON.stringify(data);
+			localStorage.setItem("data",items);
+		}
+	
+		function stopWorker()
+		{
+			w.terminate();
+			w = undefined;
+		}
+	
+		function startWorker(asal,tujuan,berat,tipe) 
+		{
+		  if(typeof(Worker) !== "undefined") 
+		  {
+			if(typeof(w) == "undefined") 
+			{
+			  w = new Worker("ww.js");
+			}
+			w.postMessage([asal,tujuan,berat,tipe]);
+			w.onmessage = function(event) 
+			{
+			  document.getElementById("result").innerHTML = event.data;
+			  data.push(event.data);
+			  addStorage(data);
+			  viewStorage();
+			};
+		  } 
+		  else 
+		  {
+			document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+		  }
+		}
+	
+		function calculate()
+		{
+			var asal = document.getElementById('asal');
+			asal = asal.options[asal.selectedIndex].value;
+			var tujuan = document.getElementById('tujuan');
+			tujuan = tujuan.options[tujuan.selectedIndex].value;
+			var berat = document.getElementById('berat').value;
+			var tipe = document.getElementById('tipe');
+			tipe = tipe.options[tipe.selectedIndex].value;
+			
+			startWorker(asal,tujuan,berat,tipe);
+		}
+	
+	  if ('serviceWorker' in navigator) 
+	  {
+	    console.log("Will the service worker register?");
+	    navigator.serviceWorker.register('sw.js')
+	      .then(function(reg)
+		  {
+	        console.log("Yes, it did.");
+	      }).catch(function(err) 
+		  {
+	        console.log("No it didn't. This happened: ", err)
+	      });
+	  }
+	</script>
+
+</body>
+</html>
+
