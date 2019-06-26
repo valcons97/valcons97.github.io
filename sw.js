@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Proyek_Mobweb';
+const CACHE_NAME = 'Hangapp';
 
 var urlsToCache = [
 	'index.html',
