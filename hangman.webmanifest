@@ -38,6 +38,5 @@
     "start_url": "/index.html",
     "background_color": "#ffffff",
     "display": "fullscreen",
-    "scope": "/index.html",
     "theme_color": "#000000"
 }
