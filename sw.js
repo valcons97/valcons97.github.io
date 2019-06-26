@@ -3,8 +3,6 @@ const CACHE_NAME = 'Proyek Mobweb';
 var urlsToCache = [
 	'index.html',
 	'offline.html',
-	'manifest.json',
-	'hangman.webmanifest',
 	'assets/css/style.css',
 	'assets/js/game.js',
 	'assets/js/wordBank.min.js',
