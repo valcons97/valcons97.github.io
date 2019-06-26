@@ -1,9 +1,8 @@
 {
-  "short_name": "Hangapp",
-  "name": "Hangapp",
-  "description": "A simple hangman game.",
-  "categories": ["games"],
-  "icons": [
+    "name": "Hangman",
+    "short_name": "Hangman",
+    "description": "Simple Hangman Game.",
+    "icons": [
     {
       "src": "touch-icons/touch-icon-iphone.png",
       "type": "image/png",
@@ -34,10 +33,11 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ],
-  "start_url": "/index.html",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "scope": "/index.html",
-  "theme_color": "#000000"
+    ],
+
+    "start_url": "/index.html",
+    "background_color": "#ffffff",
+    "display": "fullscreen",
+    "scope": "/index.html",
+    "theme_color": "#000000"
 }
