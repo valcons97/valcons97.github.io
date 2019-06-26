@@ -1,7 +1,7 @@
 {
   "short_name": "Hangapp",
   "name": "Hangapp",
-  "description": "A simple hangman game.",
+  "description": "A simple hangman game. Retrieves definitions from m-w.com and caches them for offline use.",
   "categories": ["games"],
   "icons": [
     {
@@ -35,9 +35,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "background_color": "#ffffff",
   "display": "standalone",
-  "scope": "/index.html",
+  "scope": "index.html",
   "theme_color": "#000000"
 }

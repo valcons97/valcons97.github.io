@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1.51';
+const CACHE_NAME = 'Proyek Mobweb';
 
 var urlsToCache = [
 	'index.html',
@@ -6,8 +6,7 @@ var urlsToCache = [
 	'assets/css/style.css',
 	'assets/js/game.js',
 	'assets/js/wordBank.min.js',
-	'assets/js/wordList.min.js',
-	'assets/js/favicon.ico'
+	'assets/js/wordList.min.js'
 ];
 
 self.addEventListener('install', function(event) {
