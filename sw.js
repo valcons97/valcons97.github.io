@@ -9,7 +9,7 @@ var urlsToCache = [
 	'assets/js/game.js',
 	'assets/js/wordBank.min.js',
 	'assets/js/wordList.min.js',
-	'assets/js/favicon.png'
+	'assets/js/favicon.ico'
 ];
 
 self.addEventListener('install', function(event) {
