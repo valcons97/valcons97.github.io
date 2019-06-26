@@ -628,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		installBtn.addEventListener('click', (e) => {
 		  // hide our user interface that shows our A2HS button
-		  installBtn.style.display = 'none';
+		  //installBtn.style.display = 'none';
 		  // Show the prompt
 		  deferredPrompt.prompt();
 		  // Wait for the user to respond to the prompt
