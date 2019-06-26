@@ -1,38 +1,40 @@
+const CACHE_NAME = 'Proyek Mobweb';
+
+var urlsToCache = [
+	'index.html',
+	'offline.html',
+	'assets/css/style.css',
+	'assets/js/game.js',
+	'assets/js/wordBank.min.js',
+	'assets/js/wordList.min.js',
+	'assets/js/favicon.png'
+];
+
 self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open('first-app').then(function(cache) {
-      return cache.addAll([
-          '/index.html',
-		  '/ww.js',
-		  '/offline.html',
-          '/src/js/app.js'
-      ]);
-    })
-  );
+	event.waitUntil(
+		caches.open(CACHE_NAME)
+			.then(function(cache) {
+				console.log('Opened cache');
+				return cache.addAll(urlsToCache);
+			})
+			.then(function() {
+				self.skipWaiting();
+			})
+	);
+});
+
+self.addEventListener('activate', function(event) {
+	event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    // Try the cache
-    caches.match(event.request).then(function(response) {
-      // Fall back to network
-      return response || fetch(event.request);
-    }).catch(function() {
-      // If both fail, show a generic fallback:
-      return caches.match('/offline.html');
-      // However, in reality you'd have many different
-      // fallbacks, depending on URL & headers.
-      // Eg, a fallback silhouette image for avatars.
-    })
-  );
+	event.respondWith(
+		caches.open(CACHE_NAME)
+		.then(function(cache) {
+			cache.match(event.request, {ignoreSearch: true});
+		})
+		.then(function(response) {
+			return response || fetch(event.request);
+		})
+	);
 });
-
-// self.addEventListener('fetch', function(event) {
-  // event.respondWith(
-    // // Try the network
-   // fetch(event.request).then(function(response) {
-      // // Fall back to cache
-      // return response || caches.match(event.request);
-    // })
-  // );
-// });
