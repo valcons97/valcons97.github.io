@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Proyek Mobweb';
+const CACHE_NAME = 'Proyek_Mobweb';
 
 var urlsToCache = [
 	'index.html',
